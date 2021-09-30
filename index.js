@@ -68,7 +68,7 @@ app.post('/reg_numbers',async function(req,res){
          registration_Num: regNumber
         })
         
-       //res.redirect('/');
+       res.redirect('/');
     } catch (error) {
         console.log(error)
     }
