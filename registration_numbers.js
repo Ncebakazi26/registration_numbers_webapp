@@ -82,17 +82,17 @@ module.exports=function registration_numbers(pool) {
      
     }
   
-// async function selectedTown(regString){
-//     try {
-//         var string= await getIdTown(regString)
-//     await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
+async function selectedTown(regString){
+    try {
+        var string= await getIdTown(regString)
+    await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
 
-//     } 
-//     catch (error) {
-//         console.log(error)
-//     }
+    } 
+    catch (error) {
+        console.log(error)
+    }
     
-// }
+}
  
 async function reset (){
     try {
@@ -121,7 +121,7 @@ async function reset (){
         getReglist,
         reset,
         getIdTown,
-        //selectedTown
+        selectedTown
     }
 
 }
