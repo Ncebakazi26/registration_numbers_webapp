@@ -1,0 +1,390 @@
+/**
+*** SIMPLE GRID
+*** (C) ZACH COLE 2016
+**/
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+
+/* UNIVERSAL */
+
+html,
+body {
+  /*height: 100%;*/
+  /*width: 100%;*/
+  margin: 20px;
+  padding: 20px;
+  left: 0;
+  top: 0;
+  font-size: 100%;
+  background-color: lightblue;
+  border-style: inset;
+}
+
+/* ROOT FONT STYLES */
+
+* {
+  font-family: 'Lato', Helvetica, sans-serif;
+  color: #333447;
+  line-height: 1.5;
+}
+
+/* TYPOGRAPHY */
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.375rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+/*p {
+  font-size: 1.125rem;
+  font-weight: 200;
+  line-height: 1.8;
+}
+*/
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-heavy {
+  font-weight: 700;
+}
+
+/* POSITIONING */
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.justify {
+  text-align: justify;
+}
+
+/* ==== GRID SYSTEM ==== */
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  margin-top: 50px; 
+}
+.row1{
+  padding-left: 250px;
+}
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.row [class^="col"] {
+  float: left;
+  margin: 0.5rem 2%;
+  min-height: 0.125rem;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  width: 96%;
+}
+
+.col-1-sm {
+  width: 4.33%;
+}
+
+.col-2-sm {
+  width: 12.66%;
+}
+
+.col-3-sm {
+  width: 21%;
+}
+
+.col-4-sm {
+  width: 29.33%;
+}
+
+.col-5-sm {
+  width: 37.66%;
+}
+
+.col-6-sm {
+  width: 46%;
+}
+
+.col-7-sm {
+  width: 54.33%;
+}
+
+.col-8-sm {
+  width: 62.66%;
+}
+
+.col-9-sm {
+  width: 71%;
+}
+
+.col-10-sm {
+  width: 79.33%;
+}
+
+.col-11-sm {
+  width: 87.66%;
+}
+
+.col-12-sm {
+  width: 96%;
+}
+
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.hidden-sm {
+  display: none;
+}
+th,td{
+border: solid;
+border-collapse: collapse; 
+width:50%;
+}
+table{
+border-collapse: collapse;
+width: 100%;  
+}
+/*.historical p{
+  line-height: 0.9em;
+}*/
+/* .historical img{
+  padding-top:90px;
+} */
+.city img{
+  width: 100%;
+  padding-right: 20px;
+  padding-top: 90px;
+}
+.city p{
+  margin: -10px;
+}
+@media(max-width:540px){
+  /* .historical img{
+    width: 50%;
+    float: left;
+
+
+@media only screen and (min-width: 45em) {  /* 720px */
+  .col-1 {
+    width: 4.33%;
+  }
+
+  .col-2 {
+    width: 12.66%;
+  }
+
+  .col-3 {
+    width: 21%;
+  }
+
+  .col-4 {
+    width: 29.33%;
+  }
+
+  .col-5 {
+    width: 37.66%;
+  }
+
+  .col-6 {
+    width: 46%;
+  }
+
+  .col-7 {
+    width: 54.33%;
+  }
+
+  .col-8 {
+    width: 62.66%;
+  }
+
+  .col-9 {
+    width: 71%;
+  }
+
+  .col-10 {
+    width: 79.33%;
+  }
+
+  .col-11 {
+    width: 87.66%;
+  }
+
+  .col-12 {
+    width: 96%;
+  }
+
+  .hidden-sm {
+    display: block;
+  }
+}
+.col-12 .language{
+  padding-top: 25px;
+  font-size: 30px;
+}
+#form{
+  height: 60px;
+  width: 40em;
+  margin-left: 10px;
+  position: relative;
+
+}
+.Addbtn{
+  background-color: coral;
+  border: solid;
+  color: white;
+   padding: 10px 22px;
+ text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  padding-left: 50px;
+  margin-top: 20px;
+}
+.regie {
+  padding-left: 20px;
+  padding-top: 20px;
+  border: solid;
+  border-width: 5px;
+  border-radius: 25%;
+  margin-right: 1250px;
+  margin-left: 15px;
+  background-color: yellow;
+
+}
+
+::placeholder{
+  color: coral;
+  font-size: 20px;
+}
+.regie h4{
+  padding-top: -100px;
+}
+
+#myList {
+  padding: 1em;
+  margin-left: 10px;
+ 
+}
+.radio{
+  font-size: 25px;
+}
+#myList li {
+  list-style: none;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-left:10px;
+  margin-right:1px 
+  /* font-size: 20px;
+  text-align: center */
+}
+.list{
+  font-size: 20px;
+}
+/* .error{
+  color: red;
+} */
+#myList li {
+  background-color: yellow;
+  padding: 13px;
+  margin: 13px;
+  padding-right: 50px;
+    width: 6em; 
+  border: 1px solid black;
+  border-radius: 10px;
+  
+}
+ ul{
+  background: #ffe5e5;
+  padding: 5px;
+ 
+ 
+}
+ h3{
+margin-top: -10px;
+}
+.clear{
+  background: #ffe5e5;
+  margin-left: 25px;
+  font-size: 18px;
+  padding-left: 15px;
+  padding-right:15px ;
+  
+}
+.display{
+   margin-left: 25px;
+  background: #ffe5e5;
+  font-size: 17px; 
+  
+  
+}
+.town{
+  font-size: 18px; 
+  background: #ffe5e5;
+}
+.buttons{
+font-size: 20px;  
+margin: 20px;
+margin-left: 10px;
+
+}
+.head h3{
+  padding-top: -100px;
+}
+.message{
+  font-size: 20px;
+  color: red;
+}
+
+
+

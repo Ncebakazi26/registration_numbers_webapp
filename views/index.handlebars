@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {{!--
+    <link rel="stylesheet" href="/css/registration_number.css"> --}}
+</head>
+
+<body>
+    <div class="container">
+        <div class="row1">
+            <div class="row header">
+                <h2>Please enter a registration number and click the add button</h2>
+                <h3> Below find the instructions for the other buttons:</h3>
+                <ul class="list">
+                    <li> Choose a town and click the specific town button in order to see registration numbers for that
+                        specific town</li>
+                    <li>When you click the dispaly all button it will show all registration numbers in the databse and the clear button
+                        is used to clear the screen and the database </li>
+                </ul>
+            </div>
+            <div class="message"> </div>
+
+            <div class="col-12">
+                <h2 class="registrationNumbers"></h2>
+            </div>
+            <form action="/reg_numbers" method="POST">
+                <div class=" input">
+                    <input id="form" name="reg" placeholder="The format:CA 123-123/ CA 123 123"
+                        {{!-- pattern="/^((CA|CY|CL)\s\d{3}\s\d{3})$/" --}}></input>
+                </div>
+
+
+                <div class="col-12">
+                    <button id="btn" class="Addbtn" type="submit">ADD</button>
+            </form>
+            <form action="/regTown" method="GET" class="language">
+                <input type="radio" id="Cape" class="reg" name="registration" value="CA">
+                <label class="radio" for="CT">CapeTown</label>
+                <input type="radio" id="Bellville" class="reg" name="registration" value="CY">
+                <label class="radio" for="BEL">Bellville</label>
+                <input type="radio" id="Paarl" class="reg" name="registration" value="CL">
+                <label class="radio" for="PL">Paarl</label><br>
+            
+            <div class="buttons">
+                <button class="town" type="submit">SPECIFIC TOWN</button> 
+                <button class="display">DISPLAY ALL</button>
+               <a href="/clearbtn"> <button class="clear" type="button">CLEAR</button></a>
+            </div>
+            </form>  
+        </div>
+    </div>
+    <h3 class="head">Registration Numbers List :</h3>
+    <div class="regN">
+    <ul id="myList">
+        {{#each list}}
+        <li>{{registration_num}}</li>
+        {{/each}}
+    </ul>
+</div>
+    </div>
+
+</body>
+
+</html>
+
+{{!-- title="Please follow this format CA 123-123/ CA 123 123" --}}
