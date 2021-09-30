@@ -75,13 +75,13 @@ app.post('/reg_numbers',async function(req,res){
   
    
 });
-app.get('/regTown',async function (req, res){
-    var regs = req.body.registration
-    regie = await regNum.selectedTown(regs)
+// app.get('/regTown',async function (req, res){
+//     var regs = req.body.registration
+//     regie = await regNum.selectedTown(regs)
 
-     //res.redirect('/');
+//      //res.redirect('/');
 
-});
+// });
 
 
 app.get('/clearbtn', async function(req,res){
