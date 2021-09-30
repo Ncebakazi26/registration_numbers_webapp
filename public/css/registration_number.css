@@ -381,8 +381,8 @@ margin-left: 10px;
 .head h3{
   padding-top: -100px;
 }
-.message{
-  font-size: 20px;
+.errorMessages h2{
+  /* font-size: 20px; */
   color: red;
 }
 

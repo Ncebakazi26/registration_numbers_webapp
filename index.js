@@ -64,6 +64,9 @@ app.get('/',async function(req,res){
 app.post('/reg_numbers',async function(req,res){
     try {
         var regNumber = req.body.reg
+        if (regNumber === "") {
+            req.flash('error', 'Please enter a registration number')
+        }
         reg = await regNum.setReg({
          registration_Num: regNumber
         })
@@ -76,29 +79,28 @@ app.post('/reg_numbers',async function(req,res){
    
 });
 app.post('/regTown',async function (req, res){
+   
     var regs = req.body.registration
+   
     var allReg = req.body.all
-    console.log(allReg)
+   
     if(allReg){
-        await regNum.allTowns()
+        await regNum.getReglist()
+        // res.render('index',{list});
        res.redirect('/')
+    }
+    // if(!allReg){
+    //     req.flash('error', 'There are no registrations at the moment')
+    // }
+    if(!regs == list){
+        req.flash('error', 'There are no registration numbers for this selected town')  
     }
     else{
         list = await regNum.selectedTown(regs)
      res.render('index',{list});
 
     }
-    
-
 });
-
-// app.post('/allTown', async function (req, res){
-//     var allReg = req.body.all
-//    list= await regNum.allTowns(allReg)
-//    res.render('index',{list})
-
-// });
-
 app.get('/clearbtn', async function(req,res){
     try {
         await regNum.reset() 

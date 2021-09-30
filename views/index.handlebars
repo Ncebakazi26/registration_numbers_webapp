@@ -22,7 +22,12 @@
                         is used to clear the screen and the database </li>
                 </ul>
             </div>
-            <div class="message"> </div>
+           
+                {{#if messages.error}}
+                <div class="errorMessages">
+                    <h2> {{messages.error}}</h2>
+                </div>
+                {{/if}}
 
             <div class="col-12">
                 <h2 class="registrationNumbers"></h2>

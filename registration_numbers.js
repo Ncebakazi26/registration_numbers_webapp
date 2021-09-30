@@ -39,15 +39,15 @@ module.exports=function registration_numbers(pool) {
         var regex = /^((CA|CY|CL)\s\d{3}\s\d{3})$|^((CA|CY|CL)\s\d{3}\-\d{3})$/
         var regexTest = regex.test(reg)
         var regLetters =  reg.slice(0,2);
-        
+       
         var str = await pool.query(`select town_id from towns where reg_string = $1`,[regLetters]).rows
-        
+       
         if(regexTest === true){
                const isRegExsist = await pool.query (`select registration_num from registrationnumbers where registration_num = $1`,[reg]);  
-        
+              
         if (isRegExsist.rowCount===0) {
             var townId = await getIdTown(regLetters); 
-
+    
             await pool.query(`insert into registrationnumbers (registration_num, town_id)  
             values ($1,$2)`,[reg, townId]);
         }
@@ -85,10 +85,12 @@ module.exports=function registration_numbers(pool) {
   
 async function selectedTown(regString){
     try {
+        
         var string= await getIdTown(regString)
+        
    const data= await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
     return data.rows
-
+    
     } 
     catch (error) {
         console.log(error)
@@ -96,19 +98,19 @@ async function selectedTown(regString){
     
 }
  
-   async function allTowns(regString){
-    try {
-        var string= await getIdTown(regString)
-        const towns = await pool.query(`select registration_num  from registrationnumbers where town_id =$1 `,[string]) 
-        console.log(towns.rows)
-        return towns.rows 
+//    async function allTowns(regString){
+//     try {
+//         var string= await getIdTown(regString)
+//         const towns = await pool.query(`select registration_num  from registrationnumbers where town_id =$1 `,[string]) 
+//         console.log(towns.rows)
+//         return towns.rows 
        
         
-    } catch (error) {
-        console.log(error)
+//     } catch (error) {
+//         console.log(error)
         
-    } 
-   }
+//     } 
+//    }
 
    async function reset (){
     try {
@@ -136,7 +138,7 @@ async function selectedTown(regString){
         reset,
         getIdTown,
         selectedTown,
-        allTowns
+       // allTowns
     }
 
 }
