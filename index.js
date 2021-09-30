@@ -77,14 +77,27 @@ app.post('/reg_numbers',async function(req,res){
 });
 app.post('/regTown',async function (req, res){
     var regs = req.body.registration
-  
-    
-    list = await regNum.selectedTown(regs)
-    console.log(list)
+    var allReg = req.body.all
+    console.log(allReg)
+    if(allReg){
+        await regNum.allTowns()
+       res.redirect('/')
+    }
+    else{
+        list = await regNum.selectedTown(regs)
      res.render('index',{list});
+
+    }
+    
 
 });
 
+// app.post('/allTown', async function (req, res){
+//     var allReg = req.body.all
+//    list= await regNum.allTowns(allReg)
+//    res.render('index',{list})
+
+// });
 
 app.get('/clearbtn', async function(req,res){
     try {

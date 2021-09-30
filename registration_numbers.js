@@ -96,7 +96,21 @@ async function selectedTown(regString){
     
 }
  
-async function reset (){
+   async function allTowns(regString){
+    try {
+        var string= await getIdTown(regString)
+        const towns = await pool.query(`select registration_num  from registrationnumbers where town_id =$1 `,[string]) 
+        console.log(towns.rows)
+        return towns.rows 
+       
+        
+    } catch (error) {
+        console.log(error)
+        
+    } 
+   }
+
+   async function reset (){
     try {
         const clear = await pool.query(`delete from registrationNumbers`)
         return clear.rows 
@@ -104,7 +118,6 @@ async function reset (){
         console.log(error)
     }  
 }
-   //async function reset
     // function forTown(registration){
     //    var list = []
     //    for(var i =0;i < objreg.length;i++){
@@ -122,7 +135,8 @@ async function reset (){
         getReglist,
         reset,
         getIdTown,
-        selectedTown
+        selectedTown,
+        allTowns
     }
 
 }
