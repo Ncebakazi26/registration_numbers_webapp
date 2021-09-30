@@ -85,7 +85,8 @@ module.exports=function registration_numbers(pool) {
 async function selectedTown(regString){
     try {
         var string= await getIdTown(regString)
-    await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
+   const data= await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
+    return data.rows
 
     } 
     catch (error) {

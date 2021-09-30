@@ -51,9 +51,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 var reg = ""
-
+var list = []
 app.get('/',async function(req,res){
-    var list = await regNum.getReglist()
+    list = await regNum.getReglist()
     res.render('index',{
         list,
         reg,
@@ -75,11 +75,13 @@ app.post('/reg_numbers',async function(req,res){
   
    
 });
-app.get('/regTown',async function (req, res){
+app.post('/regTown',async function (req, res){
     var regs = req.body.registration
-    regie = await regNum.selectedTown(regs)
-
-     //res.redirect('/');
+  
+    
+    list = await regNum.selectedTown(regs)
+    console.log(list)
+     res.render('index',{list});
 
 });
 
