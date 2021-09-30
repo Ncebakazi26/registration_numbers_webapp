@@ -62,6 +62,7 @@ module.exports=function registration_numbers(pool) {
     async function getIdTown(id){
         try {
             var townId = await pool.query (`select town_id from towns where reg_string = $1`,[id])
+            console.log(townId.rows[0].town_id);
             return townId.rows[0].town_id;
             
         } catch (error) {
