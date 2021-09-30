@@ -62,13 +62,17 @@ app.get('/',async function(req,res){
 });
 
 app.post('/reg_numbers',async function(req,res){
-    
-    var regNumber = req.body.reg
-    reg = await regNum.setReg({
-     registration_Num: regNumber
-    })
-    
-   res.redirect('/');
+    try {
+        var regNumber = req.body.reg
+        reg = await regNum.setReg({
+         registration_Num: regNumber
+        })
+        
+       //res.redirect('/');
+    } catch (error) {
+        console.log(error)
+    }
+  
    
 });
 app.get('/regTown',async function (req, res){
@@ -81,8 +85,14 @@ app.get('/regTown',async function (req, res){
 
 
 app.get('/clearbtn', async function(req,res){
-   await regNum.reset() 
-   res.redirect('/')
+    try {
+        await regNum.reset() 
+        res.redirect('/')
+        
+    } catch (error) {
+        console.log(error)
+    }
+ 
 });
 
 let PORT = process.env.PORT || 3008;

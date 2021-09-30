@@ -60,24 +60,48 @@ module.exports=function registration_numbers(pool) {
       }
     }
     async function getIdTown(id){
-        var townId = await pool.query (`select town_id from towns where reg_string = $1`,[id])
-        return townId.rows[0].town_id
+        try {
+            var townId = await pool.query (`select town_id from towns where reg_string = $1`,[id])
+            return townId.rows[0].town_id
+            
+        } catch (error) {
+            console.log(error)
+        }
+     
     }
 
    
    async function getReglist() {
-      const data =  await pool.query (`select * from registrationNumbers`);
-     return data.rows
+       try {
+        const data =  await pool.query (`select * from registrationNumbers`);
+        return data.rows
+           
+       } catch (error) {
+           console.log(error)
+       }
+     
     }
   
 async function selectedTown(regString){
-    var string= await getIdTown(regString)
+    try {
+        var string= await getIdTown(regString)
     await pool.query(`select registration_num from registrationnumbers where town_id = $1 `,[string] )
+
+    } 
+    catch (error) {
+        console.log(error)
+    }
+    
 }
  
 async function reset (){
-    const clear = await pool.query(`delete from registrationNumbers`)
-    return clear.rows
+    try {
+        const clear = await pool.query(`delete from registrationNumbers`)
+        return clear.rows 
+    } catch (error) {
+        console.log(error)
+    }
+  
 }
    //async function reset
     // function forTown(registration){
