@@ -40,8 +40,8 @@ module.exports = function registration_numbers(pool) {
             var regexTest = regex.test(reg)
             var regLetters = reg.slice(0, 2);
 
-            var str = await pool.query(`select town_id from towns where reg_string = $1`, [regLetters]).rows
-
+            var str = await pool.query(`select town_id from towns where reg_string = $1`, [regLetters])
+                console.log(str.rows[0].town_id);
             if (regexTest === true) {
                 const isRegExsist = await pool.query(`select registration_num from registrationnumbers where registration_num = $1`, [reg]);
 
@@ -49,7 +49,7 @@ module.exports = function registration_numbers(pool) {
                     var townId = await getIdTown(regLetters);
 
                     await pool.query(`insert into registrationnumbers (registration_num, town_id)  
-            values ($1,$2)`, [reg, townId.town_id]);
+            values ($1,$2)`, [reg, str.rows[0].town_id]);
                 }
             }
             return str;
