@@ -101,8 +101,7 @@ async function reset (){
         return clear.rows 
     } catch (error) {
         console.log(error)
-    }
-  
+    }  
 }
    //async function reset
     // function forTown(registration){
