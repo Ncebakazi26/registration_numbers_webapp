@@ -57,7 +57,7 @@ app.get('/',async function(req,res){
     res.render('index',{
         list,
         reg,
-        //regie
+        
     })
 });
 
@@ -67,10 +67,15 @@ app.post('/reg_numbers',async function(req,res){
         if (regNumber === "") {
             req.flash('error', 'Please enter a registration number')
         }
+       if(!regNumber) {
         reg = await regNum.setReg({
-         registration_Num: regNumber
-        })
-        
+            registration_Num: regNumber
+           })
+
+       }
+        else {
+            req.flash('error', 'The registration number already')  
+        }
        res.redirect('/');
     } catch (error) {
         console.log(error)
@@ -83,7 +88,7 @@ app.post('/regTown',async function (req, res){
     var regs = req.body.registration
    
     var allReg = req.body.all
-   
+    list = await regNum.selectedTown(regs)
     if(allReg){
         await regNum.getReglist()
         // res.render('index',{list});
@@ -92,11 +97,11 @@ app.post('/regTown',async function (req, res){
     // if(!allReg){
     //     req.flash('error', 'There are no registrations at the moment')
     // }
-    if(!regs == list){
-        req.flash('error', 'There are no registration numbers for this selected town')  
-    }
+    // if(list===){
+    //     req.flash('error', 'There are no registration numbers for this selected town')  
+    // }
     else{
-        list = await regNum.selectedTown(regs)
+       
      res.render('index',{list});
 
     }

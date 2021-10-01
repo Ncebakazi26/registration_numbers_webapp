@@ -34,7 +34,7 @@ module.exports=function registration_numbers(pool) {
     
     async function setReg(regN) {
       try {
-          var regs = regN.registration_Num
+        var regs = regN.registration_Num
        reg = regs.toUpperCase()
         var regex = /^((CA|CY|CL)\s\d{3}\s\d{3})$|^((CA|CY|CL)\s\d{3}\-\d{3})$/
         var regexTest = regex.test(reg)
@@ -44,13 +44,14 @@ module.exports=function registration_numbers(pool) {
        
         if(regexTest === true){
                const isRegExsist = await pool.query (`select registration_num from registrationnumbers where registration_num = $1`,[reg]);  
-              
+
+            var townId = await getIdTown(regLetters);    
         if (isRegExsist.rowCount===0) {
-            var townId = await getIdTown(regLetters); 
-    
+
             await pool.query(`insert into registrationnumbers (registration_num, town_id)  
             values ($1,$2)`,[reg, townId]);
         }
+       
       }
       return str;  
 
