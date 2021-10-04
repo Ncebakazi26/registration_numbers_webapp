@@ -2,6 +2,7 @@ module.exports=function registration_numbers(pool) {
    var objC = {} 
     var objreg =  []
     var reg = ""
+    var errorMsg = ""
     // async function addReg(){
     //     try {
     //         let towns = await pool.query(`insert into registrationNumbers (registration_num)  
@@ -98,7 +99,13 @@ async function selectedTown(regString){
     }
     
 }
- 
+function setError(error){
+    errorMsg = error
+}
+  function getError (){
+  return  errorMsg 
+  }
+  
 //    async function allTowns(regString){
 //     try {
 //         var string= await getIdTown(regString)
@@ -139,7 +146,8 @@ async function selectedTown(regString){
         reset,
         getIdTown,
         selectedTown,
-       // allTowns
+        getError,
+       setError
     }
 
 }

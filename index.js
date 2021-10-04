@@ -52,30 +52,53 @@ app.use(bodyParser.json())
 
 var reg = ""
 var list = []
+var regex = /^((CA|CY|CL)\s\d{3}\s\d{3})$|^((CA|CY|CL)\s\d{3}\-\d{3})$/
+
+
 app.get('/',async function(req,res){
     list = await regNum.getReglist()
+    var messages = req.flash('error')
+    //console.log(messages[0])
+    var error = regNum.getError()
+    console.log(error)
     res.render('index',{
         list,
         reg,
-        
+        messages
     })
 });
 
 app.post('/reg_numbers',async function(req,res){
     try {
         var regNumber = req.body.reg
+      
         if (regNumber === "") {
             req.flash('error', 'Please enter a registration number')
         }
-       if(!regNumber) {
-        reg = await regNum.setReg({
-            registration_Num: regNumber
-           })
+        if(regNumber){
+            reg = await regNum.setReg({
+                registration_Num: regNumber
+               })
 
-       }
-        else {
-            req.flash('error', 'The registration number already')  
         }
+        // else{
+        //     req.flash('error', 'Please select a town')
+        // }
+        // if(list.length!==0){
+        //     if(list[0].registration_num === regNumber) {
+        //         req.flash('error', 'The registration number already exist') 
+        //     }
+        // }
+        // if (list.includes(regNumber)===false){
+            // if(regex.test(regNumber)){
+           
+
+            // }
+
+        // else if(!regex.test(regNumber)){
+        //     req.flash('error', 'Please follow format') 
+        // } 
+      
        res.redirect('/');
     } catch (error) {
         console.log(error)
@@ -84,28 +107,61 @@ app.post('/reg_numbers',async function(req,res){
    
 });
 app.post('/regTown',async function (req, res){
-   
+   var errors = ""
+   req.flash('error', 'Please select a town')  
     var regs = req.body.registration
+    console.log(regs)
+    if (regs === undefined){
+    // errors = "Please select a town"
+    //      console.log("hello")
+        
    
-    var allReg = req.body.all
-    list = await regNum.selectedTown(regs)
-    if(allReg){
-        await regNum.getReglist()
-        // res.render('index',{list});
-       res.redirect('/')
+        
+        //res.redirect('/')
     }
-    // if(!allReg){
-    //     req.flash('error', 'There are no registrations at the moment')
-    // }
-    // if(list===){
-    //     req.flash('error', 'There are no registration numbers for this selected town')  
-    // }
-    else{
-       
-     res.render('index',{list});
+
+    if(regs){
+        list = await regNum.selectedTown(regs)
+
+        res.render('index',{list});
 
     }
+ regNum.setError(errors)
+
+   
+    // if(allReg){
+      
+        // res.render('index',{list});
+       
+    // }
+    // if(!allReg) {
+    //     req.flash('error', 'There are no registrations at the moment')
+    // }
+    // else{
+    //     req.flash('error', 'There are no registration numbers for this selected town')  
+    // }
+    //   else{
+       
+    
+
+    //   }
+      res.redirect('/')
 });
+app.post("/displayAll", async function(req,res){
+    
+    list= await regNum.getReglist()
+    if(!list){
+         req.flash('error', 'There are no registrations at the moment')
+       
+    }
+    else{ 
+        res.redirect('/')
+
+    }
+  
+
+});
+
 app.get('/clearbtn', async function(req,res){
     try {
         await regNum.reset() 

@@ -362,7 +362,7 @@ margin-top: -10px;
   
 }
 .display{
-   margin-left: 25px;
+   margin-left: 20px;
   background: #ffe5e5;
   font-size: 17px; 
   
@@ -376,6 +376,7 @@ margin-top: -10px;
 font-size: 20px;  
 margin: 20px;
 margin-left: 10px;
+display:flex;
 
 }
 .head h3{

@@ -22,12 +22,13 @@
                         is used to clear the screen and the database </li>
                 </ul>
             </div>
+            <div>{{messages}}</div>
            
-                {{#if messages.error}}
+                {{!-- {{#if messages.error}}
                 <div class="errorMessages">
                     <h2> {{messages.error}}</h2>
                 </div>
-                {{/if}}
+                {{/if}} --}}
 
             <div class="col-12">
                 <h2 class="registrationNumbers"></h2>
@@ -52,10 +53,17 @@
             
             <div class="buttons">
                 <button class="town" type="submit">SPECIFIC TOWN</button> 
-                <button class="display" type="submit" name="all" value="all">DISPLAY ALL</button>
+                </div>
+                 </form> 
+                 <form action="/displayAll" method="POST">
+                 <div class="buttons">
+                  <button class="display" type="submit" >DISPLAY ALL</button>
+                     </div>
+                  </form>
                <a href="/clearbtn"> <button class="clear" type="button">CLEAR</button></a>
             </div>
-            </form>  
+            
+          
         </div>
     </div>
     <h3 class="head">Registration Numbers List :</h3>
