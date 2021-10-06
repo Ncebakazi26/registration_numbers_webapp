@@ -55,9 +55,6 @@ app.use(bodyParser.json())
 
 var reg = ""
 var list = []
-var regex = /^((CA|CY|CL)\s\d{3}\s\d{3})$|^((CA|CY|CL)\s\d{3}\-\d{3})$/
-
-
 app.get('/', async function (req, res) {
     list = await regNum.getReglist()
     res.render('index', {
@@ -69,129 +66,12 @@ app.get('/', async function (req, res) {
 app.post('/reg_numbers', async function (req, res) {
     try {
         var regNumber = req.body.reg
-        var capitalise = regNumber.toUpperCase()
         list = await regNum.getReglist()
-            if (regNumber !=="") {
-                if(regex.test(capitalise)){
-                    reg = await regNum.setReg({
-                        registration_Num: capitalise
-                    })
-            //            if(list === capitalise){
-            //     req.flash('error', "Registration already exists") 
-
-            //  }
-                }
-             
-                else{
-                    req.flash('error', 'Please follow  the format shown on the screen') 
-                }
-          
-        //         else{
-        //             reg = await regNum.setReg({
-        //                 registration_Num: regNumber
-        //             })
-                     
-        // res.redirect('/');
-        //         }
-              
-            }
-            else{
-                req.flash('error', 'Please enter a registration number')
-            }
-          
-          
-        //    else if (list.length!==0){
-        //         if(list[0].registration_num === regNumber) {
-        //             console.log("hi")
-        //               req.flash('error', 'The registration number already exist') 
-        //               res.redirect('/')
-        //                }
-
-        //     }
-        //     else 
-
-
-        // else if (list.length!==0) {
-
-        //     if (list.includes(capitalise)===false){
-        //         console.log(regex.test(capitalise));
-        //         if(regex.test(capitalise)){
-        //             // if (list[0].registration_num === capitalise) {
-        //             //     req.flash('error', 'The registration number already exist')   
-        //             // }
-        //             //else{
-        //                 reg = await regNum.setReg({
-        //                     registration_Num: capitalise
-        //                    })
-
-        //            // }
-        //             console.log("regex test");
-
-
-
-        //         }
-        //          else{
-        //             req.flash('error', 'Please follow format') 
-        //          }
-        //     }
-
-
-        //  }
-
-        //    else 
-
-        // else{
-        //     req.flash('error', 'Please follow format') 
-        //     res.redirect('/')
-        // } 
-
-
-        // if(list.length!==0){
-        //     if(list[0].registration_num === regNumber) {
-        //         req.flash('error', 'The registration number already exist') 
-        //     }
-        // }
-        // if (list.includes(regNumber)===false){
-        // if(regex.test(regNumber)){
-
-
-        // }
-
-        // else if(!regex.test(regNumber)){
-        //     req.flash('error', 'Please follow format') 
-        // } 
-
-        // if (regNumber !== "") {
-
-        //     if (list.length === 0) {
-        //         for (let x = 0; x < list.length; x++) {
-        //             const regNumbers = list[x];
-        //             console.log(list[x]);
-        //             if (regNumbers.registration_num !== regNumber) {
-        //                 console.log('not found');
-        //                 if (regex.test(capitalise)) {
-
-        //                 } else {
-        //                     req.flash('error', 'Please follow format')
-        //                 }
-        //             } else {
-        //                 req.flash('error', 'The registration number already exist')
-        //             }
-        //         }
-        //     }
-        // } else {
-        //     req.flash('error', regNum.getError())
-        
-           
-        
-           
-
-            // req.flash('error', regNum.getError())
-        
+        reg = await regNum.setReg({
+            registration_Num: regNumber
+        })
+        req.flash('error', regNum.getError())
         res.redirect('/');
-
-        // res.render('index')
-
     } catch (error) {
         console.log(error)
     }
@@ -216,26 +96,6 @@ app.post('/regTown', async function (req, res) {
         res.render('index', { list });
 
     }
-
-
-
-    // if(allReg){
-
-    // res.render('index',{list});
-
-    // }
-    // if(!allReg) {
-    //     req.flash('error', 'There are no registrations at the moment')
-    // }
-    // else{
-    //     req.flash('error', 'There are no registration numbers for this selected town')  
-    // }
-    //   else{
-
-
-
-    //   }
-    //res.redirect('/')
 });
 app.post("/displayAll", async function (req, res) {
 
