@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const registration_numbers = require('./registration_numbers');
-// const Routes = require('./routes/registrations')
+const Routes = require('./routes/registrations')
 
 
 const pg = require("pg");
@@ -28,7 +28,7 @@ const pool = new Pool({
 
 const app = express()
 const regNum = registration_numbers(pool)
-// regRoutes = Routes(regNUm)
+ regRoutes = Routes(regNum)
 
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
@@ -53,73 +53,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
-var reg = ""
-var list = []
-app.get('/', async function (req, res) {
-    list = await regNum.getReglist()
-    res.render('index', {
-        list,
-        reg,
-    })
-});
 
-app.post('/reg_numbers', async function (req, res) {
-    try {
-        var regNumber = req.body.reg
-        list = await regNum.getReglist()
-        reg = await regNum.setReg({
-            registration_Num: regNumber
-        })
-        req.flash('error', regNum.getError())
-        res.redirect('/');
-    } catch (error) {
-        console.log(error)
-    }
-
-
-});
-app.post('/regTown', async function (req, res) {
-    var regs = req.body.registration
-
-
-    if (regs === undefined) {
-        req.flash('error', 'Please select a town first')
-
-        res.render('index')
-    }
-
-    else {
-        list = await regNum.selectedTown(regs)
-        if (list.length === 0) {
-            req.flash('error', 'There are no registration numbers for this selected town')
-        }
-        res.render('index', { list });
-
-    }
-});
-app.post("/displayAll", async function (req, res) {
-
-    list = await regNum.getReglist()
-    console.log(list);
-    if (list.length === 0) {
-        req.flash('error', 'There are no registration numbers at the moment')
-
-    }
-    res.redirect('/')
-});
-
-app.get('/clearbtn', async function (req, res) {
-    try {
-        await regNum.reset()
-        res.redirect('/')
-
-    } catch (error) {
-        console.log(error)
-    }
-
-});
+app.get('/',regRoutes.homePage);
+app.post('/reg_numbers', regRoutes.addRegistration);
+app.post('/regTown', regRoutes.selectTown);
+app.post("/displayAll",regRoutes.showAll);
+app.get('/clearbtn',regRoutes.clear);
 
 let PORT = process.env.PORT || 3008;
 app.listen(PORT, function () {
-    console.log("app started", PORT)
+console.log("app started", PORT)
 });
