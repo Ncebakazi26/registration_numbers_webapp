@@ -15,37 +15,58 @@ describe('The regstration numbers web app', function () {
     });
     it('should add the registration numbers in the db and return 1', async function () {
         await reg.setReg({
-            regNum: "CA 123 123"
+            registration_Num: "CA 123 123"
         });
-        let regs = reg.getReglist()
+        let regs =  await reg.getReglist()
         assert.equal(1, regs.length)
     });
+    it ('should not add any other registration number that does not starts with CA,CY and CL in the db and return 0', async function(){
+        await reg.setReg({
+            registration_Num:"CJ 123 123"
+        })
+        let regs= await reg.getReglist()
+        assert.equal(0,regs.length )
 
-    // it ('should add the registration numbers in the db and return the added registration numbers', async function(){
-        // await reg.setReg({
-        //     regNum:"CL 123 123"
-        // })
-        // assert.equal("CL 123 123",reg.getReglist)
+    });
+   it ('should return 1 for the registration number that belongs to Cape Town', async function(){
+        assert.equal(1, await reg.getIdTown("CA"))
 
-    // });
-    // it ('should add the registration numbers from Cape Town in the db and return the name Cape Town', async function(){
-    //     await reg.setReg({
-    //         regNum:"CA 543 213"
-    //     })
-    //     assert.equal("Cape Town",reg.selectedTown())
+    });
+    it ('should return 2 for the registration number that belongs to Bellville', async function(){
+        assert.equal(2, await reg.getIdTown("CY"))
 
-    // });
+    });
+    it ('should return 3 for the registration number that belongs to Paarl', async function(){
+        assert.equal(3, await reg.getIdTown("CL"))
 
-   // it ('should not add the registration numbers that has morethan 6 digits and return the error message', async function(){
-    //     await reg.setReg({
-    //         regNum:"CA 543 2137"
-    //     })
-    //     assert.equal("Please follow the format",reg.setReg())
+    });
+    it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
+        await reg.setReg({
+            registration_Num:""
+        })
 
-    // });
-    
+        assert.equal("Please enter a registration number", await reg.getError())
 
+     });
+     it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
+        await reg.setReg({
+            registration_Num:"CL 123 5647"
+        })
 
+        assert.equal('Please follow  the format shown on the screen', await reg.getError())
+
+     });
+     it ('should return ', async function(){
+        await reg.setReg({
+            registration_Num:"CL 123 564"
+        })
+        await reg.setReg({
+            registration_Num:"CL 123 564"
+        })
+
+        assert.equal('Registration number already exists', await reg.getError())
+
+     });
     after(function(){
         pool.end();
     })
