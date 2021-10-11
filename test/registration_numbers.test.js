@@ -3,7 +3,7 @@ const registration_numbers = require('../registration_numbers');
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/registration_numbers1';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/registration_numbers1_test';
 
 const pool = new Pool({
     connectionString
