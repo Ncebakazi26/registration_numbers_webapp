@@ -20,6 +20,35 @@ describe('The regstration numbers web app', function () {
         let regs =  await reg.getReglist()
         assert.equal(1, regs.length)
     });
+    it('should add the registration numbers in the db and return 3', async function () {
+        await reg.setReg({
+            registration_Num: 'CA 123 123'
+        });
+        await reg.setReg({
+            registration_Num: 'CY 123 153'
+        });
+        await reg.setReg({
+            registration_Num: 'CL 273 123'
+        });
+        let regs =  await reg.getReglist()
+        assert.equal(3, regs.length)
+    });
+    it('should not add the same registration number in the db and must return 3 for the length', async function () {
+        await reg.setReg({
+            registration_Num: 'CA 123 123'
+        });
+        await reg.setReg({
+            registration_Num: 'CY 123 153'
+        });
+        await reg.setReg({
+            registration_Num: 'CL 273 123'
+        });
+        await reg.setReg({
+            registration_Num: 'CL 273 123'
+        });
+        let regs =  await reg.getReglist()
+        assert.equal(3, regs.length)
+    });
     // it ('should not add any other registration number that does not starts with CA,CY and CL in the db and return 0', async function(){
     //     await reg.setReg({
     //         registration_Num:'CJ 123 123'
@@ -41,14 +70,14 @@ describe('The regstration numbers web app', function () {
         assert.equal(3, await reg.getIdTown('CL'))
 
     });
-    it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
-        await reg.setReg({
-            registration_Num:""
-        })
+    // it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
+    //     await reg.setReg({
+    //         registration_Num:""
+    //     })
 
-        assert.equal("Please enter a registration number", await reg.getError())
+    //     assert.equal("Please enter a registration number", await reg.getError())
 
-     });
+    //  });
      it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
         await reg.setReg({
             registration_Num:"CL 123 5647"
