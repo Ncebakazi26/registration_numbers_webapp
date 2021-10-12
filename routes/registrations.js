@@ -67,7 +67,9 @@ async function selectTown (req, res, next) {
 async function clear (req, res, next) {    
         try {
             await regNum.reset()
+            req.flash('info', 'The App has successfully reset')
             res.redirect('/')
+            
     
         } catch (error) {
             next(error)

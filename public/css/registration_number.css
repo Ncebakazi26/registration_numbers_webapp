@@ -387,6 +387,9 @@ margin-left: 10px;
   /* font-size: 20px; */
   color: red;
 }
+.messages h2{
+  color:green;
+}
 .allBtn{
   display: inline-flex;
 }

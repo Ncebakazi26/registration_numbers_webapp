@@ -83,6 +83,7 @@ module.exports = function registration_numbers(pool) {
         } catch (error) {
             console.log(error)
         }
+        
     }
     return {
         setReg,
