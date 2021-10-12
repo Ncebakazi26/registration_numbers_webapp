@@ -358,7 +358,8 @@ margin-top: -10px;
   margin-left: 25px;
   font-size: 18px;
   padding-left: 15px;
-  padding-right:15px ;
+  padding-right:15px;
+  margin-top: 20px;
   
 }
 .display{
@@ -376,7 +377,7 @@ margin-top: -10px;
 font-size: 20px;  
 margin: 20px;
 margin-left: 10px;
-display:flex;
+/* display:flex; */
 
 }
 .head h3{
@@ -385,6 +386,14 @@ display:flex;
 .errorMessages h2{
   /* font-size: 20px; */
   color: red;
+}
+.allBtn{
+  display: inline-flex;
+}
+@media(max-width:400px){
+
+
+
 }
 
 

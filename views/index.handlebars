@@ -22,8 +22,6 @@
                         is used to clear the screen and the database </li>
                 </ul>
             </div>
-            {{!-- <div>{{messages}}</div> --}}
-           
                 {{#if messages.error}}
                 <div class="errorMessages">
                     <h2> {{messages.error}}</h2>
@@ -36,9 +34,8 @@
             <form action="/reg_numbers" method="POST">
                 <div class=" input">
                     <input id="form" name="reg" placeholder="The format:CA 123-123/ CA 123 123"
-                        {{!-- pattern="/^((CA|CY|CL)\s\d{3}\s\d{3})$/" --}}></input>
+                    ></input>
                 </div>
-
 
                 <div class="col-12">
                     <button id="btn" class="Addbtn" type="submit">ADD</button>
@@ -51,6 +48,7 @@
                 <input type="radio" id="Paarl" class="reg" name="registration" value="CL">
                 <label class="radio" for="PL">Paarl</label><br>
             
+            <div class="allBtn">
             <div class="buttons">
                 <button class="town" type="submit">SPECIFIC TOWN</button> 
                 </div>
@@ -61,6 +59,8 @@
                      </div>
                   </form>
                <a href="/clearbtn"> <button class="clear" type="button">CLEAR</button></a>
+            </div>
+
             </div>
             
           
