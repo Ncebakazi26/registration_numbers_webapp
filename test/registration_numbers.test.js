@@ -41,14 +41,14 @@ describe('The regstration numbers web app', function () {
         assert.equal(3, await reg.getIdTown('CL'))
 
     });
-    // it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
-    //     await reg.setReg({
-    //         registration_Num:""
-    //     })
+    it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
+        await reg.setReg({
+            registration_Num:""
+        })
 
-    //     assert.equal("Please enter a registration number", await reg.getError())
+        assert.equal("Please enter a registration number", await reg.getError())
 
-    //  });
+     });
      it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
         await reg.setReg({
             registration_Num:"CL 123 5647"
