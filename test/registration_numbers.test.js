@@ -49,15 +49,15 @@ describe('The regstration numbers web app', function () {
     //     assert.equal("Please enter a registration number", await reg.getError())
 
     //  });
-    //  it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
-    //     await reg.setReg({
-    //         registration_Num:"CL 123 5647"
-    //     })
+     it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
+        await reg.setReg({
+            registration_Num:"CL 123 5647"
+        })
 
-    //     assert.equal('Please follow  the format shown on the screen', await reg.getError())
+        assert.equal('Please follow  the format shown on the screen', await reg.getError())
 
-    //  });
-     it ('should return ', async function(){
+     });
+     it ('should display the error message when the same registration number is entered ', async function(){
         await reg.setReg({
             registration_Num:"CL 123 564"
         })
