@@ -28,7 +28,7 @@ const pool = new Pool({
 
 const app = express()
 const regNum = registration_numbers(pool)
- regRoutes = Routes(regNum)
+regRoutes = Routes(regNum)
 
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
@@ -54,13 +54,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-app.get('/',regRoutes.homePage);
+app.get('/', regRoutes.homePage);
 app.post('/reg_numbers', regRoutes.addRegistration);
 app.post('/regTown', regRoutes.selectTown);
-app.post("/displayAll",regRoutes.showAll);
-app.get('/clearbtn',regRoutes.clear);
+app.post("/displayAll", regRoutes.showAll);
+app.get('/clearbtn', regRoutes.clear);
 
 let PORT = process.env.PORT || 3008;
 app.listen(PORT, function () {
-console.log("app started", PORT)
+    console.log("app started", PORT)
 });

@@ -5,7 +5,7 @@ module.exports = function registration_numbers(pool) {
         try {
             errorMsg = ""
             var regs = regN.registration_Num
-            
+
             reg = regs.toUpperCase()
             var regex = /^((CA|CY|CL)\s\d{3}\s\d{3})$|^((CA|CY|CL)\s\d{3}\-\d{3})$/
             var regexTest = regex.test(reg)
@@ -65,7 +65,7 @@ module.exports = function registration_numbers(pool) {
             var string = await getIdTown(regString)
             const data = await pool.query(`select registration_num from registrationnumbers where town_id = $1 `, [string])
             return data.rows
-            
+
         }
         catch (error) {
             console.log(error)
@@ -83,7 +83,7 @@ module.exports = function registration_numbers(pool) {
         } catch (error) {
             console.log(error)
         }
-        
+
     }
     return {
         setReg,
