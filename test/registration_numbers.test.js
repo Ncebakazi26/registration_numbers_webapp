@@ -49,14 +49,7 @@ describe('The regstration numbers web app', function () {
         let regs =  await reg.getReglist()
         assert.equal(3, regs.length)
     });
-    // it ('should not add any other registration number that does not starts with CA,CY and CL in the db and return 0', async function(){
-    //     await reg.setReg({
-    //         registration_Num:'CJ 123 123'
-    //     })
-    //     let regs= await reg.getReglist()
-    //     assert.equal(0,regs.length )
-
-    // });
+ 
    it ('should return 1 for the registration number that belongs to Cape Town', async function(){
      
        assert.equal(1, await reg.getIdTown('CA'))
@@ -70,14 +63,34 @@ describe('The regstration numbers web app', function () {
         assert.equal(3, await reg.getIdTown('CL'))
 
     });
-    // it ('should display an error saying enter a registration number when there is no registration number entered', async function(){
-    //     await reg.setReg({
-    //         registration_Num:""
-    //     })
+    it ('should display registration numbers for Cape Town if its the seclected town  ', async function(){
+        await reg.setReg({
+            registration_Num:"CL 854 955"
+        })
+        await reg.setReg({
+            registration_Num:"CL 369 955"
+        })
+        await reg.setReg({
+            registration_Num:"CA 854 955"
+        })
 
-    //     assert.equal("Please enter a registration number", await reg.getError())
+        assert.deepEqual([{registration_num:"CA 854 955"}], await reg.selectedTown("CA"))
 
-    //  });
+     });
+     it ('should display registration numbers for Bellville if its the seclected town  ', async function(){
+        await reg.setReg({
+            registration_Num:"CL 854 955"
+        })
+        await reg.setReg({
+            registration_Num:"CY 369 876"
+        })
+        await reg.setReg({
+            registration_Num:"CY 123 955"
+        })
+
+        assert.deepEqual([{registration_num:"CY 369 876"}, {registration_num:"CY 123 955"}], await reg.selectedTown("CY"))
+
+     });
      it ('should return an error saying follow the format if the digits for the registration number are morethan 6', async function(){
         await reg.setReg({
             registration_Num:"CL 123 5647"
