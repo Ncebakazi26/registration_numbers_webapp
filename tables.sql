@@ -9,6 +9,9 @@ create table registrationnumbers(
 	town_id  int not null,
 	foreign key (town_id) references towns (town_id)
 );
+insert into towns (town_name, reg_string) values ('Cape Town', 'CA');
+insert into towns (town_name, reg_string) values ('Bellville ', 'CY');
+insert into towns (town_name, reg_string) values ('Paarl', 'CL');
 
-alter table towns add constraint uniq_desc_constraint unique(town_name);
+-- alter table towns add constraint uniq_desc_constraint unique(town_name);
 -- database name =  registration_numbers1
