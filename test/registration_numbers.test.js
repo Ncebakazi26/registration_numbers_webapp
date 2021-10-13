@@ -110,6 +110,12 @@ describe('The regstration numbers web app', function () {
         assert.equal('Registration number already exists', await reg.getError())
 
     });
+    it('should delete the registration number that exist in the database', async function () {
+        await reg.getReglist("CL 123 564")
+
+        assert.equal("", await reg.reset())
+
+    });
     after(function () {
         pool.end();
     })
