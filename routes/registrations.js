@@ -8,7 +8,7 @@ module.exports = function regRoutes(regNum) {
             list,
             reg,
         });
-    };
+    }
 
     async function addRegistration(req, res, next) {
         try {
@@ -48,7 +48,7 @@ module.exports = function regRoutes(regNum) {
 
     }
 
-    async function showAll(req, res) {
+    async function showAll(req, res, next) {
         try {
             list = await regNum.getReglist()
             console.log(list);
