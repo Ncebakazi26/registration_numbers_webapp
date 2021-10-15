@@ -324,16 +324,14 @@ width: 100%;
   display: inline-block;
   padding-bottom: 10px;
   margin-left:10px;
-  margin-right:1px 
-  /* font-size: 20px;
-  text-align: center */
+  margin-right:20px 
+
 }
 .list{
   font-size: 20px;
+  list-style: none;
 }
-/* .error{
-  color: red;
-} */
+
 #myList li {
   background-color: yellow;
   padding: 13px;
@@ -342,11 +340,12 @@ width: 100%;
     width: 6em; 
   border: 1px solid black;
   border-radius: 10px;
+  text-align: center;
   
 }
  ul{
   background: #ffe5e5;
-  padding: 5px;
+  padding: 10px;
  
  
 }
